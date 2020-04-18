@@ -1,26 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameDirector : MonoBehaviour
 {
+    public static string FinishSumText = "234";
+    
     public Text currentSumText;
     public Text cardText;
     public Text inputText;
     public Text remainText;
 
     private Card[] _cards;
-    private int _numRemainCard = 52;
+    private const int NumCard = 52;
+    private int _numRemainCard;
     private Dictionary<string, GameObject> _cardMarks;
     
     // Start is called before the first frame update
     void Start()
     {
+        _numRemainCard = NumCard;
         inputText.text = "0";
         currentSumText.text = "0";
-        var seq = new Card[52];
-        for (int i = 0; i < 52; i++)
+        var seq = new Card[NumCard];
+        for (int i = 0; i < NumCard; i++)
         {
             seq[i] = new Card((i % 13) + 1, i / 13);
         }
@@ -40,7 +46,7 @@ public class GameDirector : MonoBehaviour
         _cardMarks["Clover"].SetActive(false);
 
         cardText.text = _cards[0].Number.ToString();
-        var markKey = _cards[52 - _numRemainCard].Mark;
+        var markKey = _cards[NumCard - _numRemainCard].Mark;
         _cardMarks[markKey].SetActive(true);
         _numRemainCard--;
         remainText.text = "残り53枚";
@@ -57,15 +63,20 @@ public class GameDirector : MonoBehaviour
         currentSumText.text = inputText.text;
         inputText.text = "0";
 
-        cardText.text = _cards[52 - _numRemainCard].Number.ToString();
+        cardText.text = _cards[NumCard - _numRemainCard].Number.ToString();
         _cardMarks["Dia"].SetActive(false);
         _cardMarks["Spade"].SetActive(false);
         _cardMarks["Heart"].SetActive(false);
         _cardMarks["Clover"].SetActive(false);
-        var markKey = _cards[52 - _numRemainCard].Mark;
+        var markKey = _cards[NumCard - _numRemainCard].Mark;
         _cardMarks[markKey].SetActive(true);
         remainText.text = "残り" + _numRemainCard + "枚";
         _numRemainCard--;
+        if (_numRemainCard == 0)
+        {
+            GameDirector.FinishSumText = currentSumText.text;
+            SceneManager.LoadScene("FinishScene");
+        }
     }
 
     public void OnBsButtonClick()
