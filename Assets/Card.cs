@@ -9,19 +9,19 @@ public class Card
         {
                 if (markIndex == 0)
                 {
-                        this.Mark = "♠";                        
+                        this.Mark = "Spade";                        
                 }
                 else if (markIndex == 1)
                 {
-                        this.Mark = "♧";
+                        this.Mark = "Clover";
                 }
                 else if (markIndex == 2)
                 {
-                        this.Mark = "♡";
+                        this.Mark = "Heart";
                 }
                 else if (markIndex == 3)
                 {
-                        this.Mark = "♦";
+                        this.Mark = "Dia";
                 }
                 
                 this.Number = number;
