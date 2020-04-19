@@ -26,6 +26,17 @@ public class Card
                 
                 this.Number = number;
         }
+
+        public static Card[] GenerateFullSet(int numCard)
+        {
+                var cards = new Card[numCard];
+                for (int i = 0; i < numCard; i++)
+                {
+                        cards[i] = new Card((i % 13) + 1, i / 13);
+                }
+
+                return cards;
+        }
         
         public static Card[] Shuffle(Card[] cards)
         {

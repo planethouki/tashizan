@@ -25,13 +25,8 @@ public class GameDirector : MonoBehaviour
         _numRemainCard = NumCard;
         inputText.text = "0";
         currentSumText.text = "0";
-        var seq = new Card[NumCard];
-        for (int i = 0; i < NumCard; i++)
-        {
-            seq[i] = new Card((i % 13) + 1, i / 13);
-        }
 
-        _cards = Card.Shuffle(seq);
+        _cards = Card.Shuffle(Card.GenerateFullSet(NumCard));
 
         _cardMarks = new Dictionary<string, GameObject>()
         {
