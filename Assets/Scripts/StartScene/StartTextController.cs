@@ -41,21 +41,5 @@ public class StartTextController : MonoBehaviour
         }
         
         _mesh.color = new Color(1, 1, 1, _textOpacity);
-
-        if (Input.GetMouseButtonDown(0) && _isTap == false)
-        {
-            _isTap = true;
-            StartCoroutine(FadeScene());
-        }
-    }
-
-    IEnumerator FadeScene()
-    {
-        for (float i = 0; i < 200; i++)
-        {
-            _panelImage.color = new Color(1, 1, 1, i / 200);
-            yield return null;
-        }
-        SceneManager.LoadScene("GameScene");
     }
 }

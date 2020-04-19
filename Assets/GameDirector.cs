@@ -40,11 +40,7 @@ public class GameDirector : MonoBehaviour
         _cardMarks["Heart"].SetActive(false);
         _cardMarks["Clover"].SetActive(false);
 
-        cardText.text = _cards[0].Number.ToString();
-        var markKey = _cards[NumCard - _numRemainCard].Mark;
-        _cardMarks[markKey].SetActive(true);
-        _numRemainCard--;
-        remainText.text = "残り53枚";
+        OnGoButtonClick();
     }
 
     // Update is called once per frame
@@ -57,20 +53,23 @@ public class GameDirector : MonoBehaviour
     {
         currentSumText.text = inputText.text;
         inputText.text = "0";
-
-        cardText.text = _cards[NumCard - _numRemainCard].Number.ToString();
-        _cardMarks["Dia"].SetActive(false);
-        _cardMarks["Spade"].SetActive(false);
-        _cardMarks["Heart"].SetActive(false);
-        _cardMarks["Clover"].SetActive(false);
-        var markKey = _cards[NumCard - _numRemainCard].Mark;
-        _cardMarks[markKey].SetActive(true);
-        remainText.text = "残り" + _numRemainCard + "枚";
-        _numRemainCard--;
+        
         if (_numRemainCard == 0)
         {
             GameDirector.FinishSumText = currentSumText.text;
             SceneManager.LoadScene("FinishScene");
+        }
+        else
+        {
+            var drawCard = _cards[NumCard - _numRemainCard]; 
+            cardText.text = drawCard.Number.ToString();
+            _cardMarks["Dia"].SetActive(false);
+            _cardMarks["Spade"].SetActive(false);
+            _cardMarks["Heart"].SetActive(false);
+            _cardMarks["Clover"].SetActive(false);
+            _cardMarks[drawCard.Mark].SetActive(true);
+            _numRemainCard--;
+            remainText.text = "残り" + _numRemainCard + "枚";
         }
     }
 
